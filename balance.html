@@ -19,7 +19,16 @@
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
+   <script>
+    window.addEventListener('load', function () {
+        const depositAmount = localStorage.getItem('depositAmount');
+        if (depositAmount) {
+            document.getElementById('balance-display').textContent = Deposited Amount: $${depositAmount};
+        } else {
+            document.getElementById('balance-display').textContent = 'No deposit amount found.';
+        }
+    });
+</script>
 </body>
 </html>
 
