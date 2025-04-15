@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - ATM System</title>
+  <link href="home_styles.css" rel="stylesheet">
+
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1> APJ ATM</h1>
+    <div class="header-links">
+    <a href="index.html">Home</a> |
+    <a href="login.html">Login</a> |
+    <a href="signup.html">Sign Up</a> 
+    
+    </div>
+  </header>
+
+
+
+  <!-- Main content and login section inside a box -->
+  <div class="main-container">
+    <div class="content-login-box">
+      <!-- Left Section: Content Area -->
+      <div class="content-section" id="contentSection">
+        
+      </div>
+
+      <!-- Right Section: Login Form -->
+      <div class="login-container">
+        <h2>Login </h2>
+        <br>
+
+        <div class="input-group">
+          <label for="accountNumber">Account Number</label>
+          <input type="text" id="accountNumber" style="width: 70%; height: 20%;" placeholder="Enter your account number" required>
+        </div>
+
+        <div class="input-group">
+            <label for="pin">PIN</label><br>
+            <input type="password" id="pin" style="width: 70%; height: 20%;" placeholder="Enter your PIN" required><br>
+          <button class="forgot-password-btn" onclick="forgotPassword()">Forgot PIN?</button>
+        </div>
+
+        <button class="btn-submit" onclick="login()">Login</button>
+        <br>
+
+        <!-- Update the link to the new sign-up page -->
+        <div class="signup-link">
+            <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    // Function to change content dynamically
+   
+    function login() {
+      const accountNumber = document.getElementById("accountNumber").value;
+      const pin = document.getElementById("pin").value;
+
+      if (accountNumber && pin) {
+        const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+        const account = accounts.find(acc => acc.accountNumber === accountNumber && acc.pin === pin);
+
+        if (account) {
+          sessionStorage.setItem("currentAccount", JSON.stringify(account));
+          window.location.href = "dashboard.html";
+        } else {
+          alert("Invalid account number or PIN.");
+        }
+      } else {
+        alert("Please enter both account number and PIN.");
+      }
+    }
+
+    function forgotPassword() {
+      /*alert("Please contact support to reset your PIN.");*/
+      const accountNumber = document.getElementById("accountNumber").value;
+
+  if (accountNumber) {
+    const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+    const account = accounts.find(acc => acc.accountNumber === accountNumber);
+
+    if (account) {
+      // Simulate sending a password reset (in a real app, this would be more complex)
+      alert(`An email has been sent to the registered email address for account number: ${accountNumber}. Follow the instructions to reset your PIN.`);
+    } else {
+      alert("Account number not found.");
+    }
+  } else {
+    alert("Please enter your account number to proceed.");
+  }
+    }
+
+    function openSignUp() {
+      document.getElementById("signUpModal").style.display = "block";
+    }
+
+    function closeSignUp() {
+      document.getElementById("signUpModal").style.display = "none";
+    }
+
+    function signUp() {
+      const newAccountNumber = document.getElementById("newAccountNumber").value;
+      const newPin = document.getElementById("newPin").value;
+      const newBalance = document.getElementById("newBalance").value;
+
+      if (newAccountNumber && newPin && newBalance) {
+        const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+        const account = { accountNumber: newAccountNumber, pin: newPin, balance: parseFloat(newBalance), transactions: [] };
+        accounts.push(account);
+        localStorage.setItem("accounts", JSON.stringify(accounts));
+
+        alert("Account created successfully!");
+        closeSignUp();
+      } else {
+        alert("Please fill in all fields.");
+      }
+    }
+  </script>
+
+</body>
+</html>
