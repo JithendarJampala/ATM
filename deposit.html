@@ -21,6 +21,16 @@
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
+   <script>
+    document.querySelector('.button').addEventListener('click', function (e) {
+        const depositAmount = document.getElementById('deposit-amount').value;
+        if (depositAmount) {
+            localStorage.setItem('depositAmount', depositAmount);
+        } else {
+            alert('Please enter a valid amount!');
+            e.preventDefault(); // Prevent navigation if no amount is entered
+        }
+    });
+</script>
 </body>
 </html>
