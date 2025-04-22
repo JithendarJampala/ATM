@@ -1,0 +1,370 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+
+  
+}
+
+/* Header Styles */
+header {
+    position:fixed;
+  background-color: #0b0b0b;
+  color: white;
+  text-align: center;
+  padding: 15px 80px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  z-index:999;
+
+
+}
+.header {
+  animation: none;
+  transition: none;
+}
+
+.header-links a {
+  margin-left: 15px;
+  text-decoration: none;
+  color: white;
+  flex-wrap: wrap;
+}
+
+.tagline {
+  text-align: left;
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: black;
+  margin-top: 50px;
+  margin-left: 0;
+  width: fit-content;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.home-content {
+  margin-top: 30px;
+  margin-left: 0;
+  max-width: 700px;
+  font-size: 1.2rem;
+  color: #333;
+  padding: 20px 0;
+}
+
+.home-content h2 {
+  color: #0b0b0b;
+  margin-bottom: 15px;
+}
+
+/* Main Intro Section with image */
+.main-intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 50px 80px 0 80px;
+  flex-wrap: wrap;
+  gap: 30px;
+
+}
+
+.image-container {
+  flex-shrink: 0;
+}
+
+.atm-image {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Main content container */
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  padding: 20px;
+}
+
+/* Left Section */
+.content-section {
+  flex: 1;
+  min-width: 280px;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Right Login Section */
+.login-container {
+  flex: 1;
+  min-width: 280px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border: 2px solid #4f4c4c;
+  text-align: center;
+}
+
+/* Input Fields */
+.input-group {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #0f0f0f;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Buttons */
+.btn-submit {
+  width: 100%;
+  max-width: 200px;
+  padding: 12px;
+  background-color: #0b0b0b;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-submit:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .content-login-box {
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+  }
+
+  .content-section,
+  .login-container {
+    max-width: 100%;
+  }
+
+  header {
+    padding: 15px 20px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .header-links {
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .main-intro {
+    flex-direction: column;
+    align-items: center;
+    margin: 30px 20px 0 20px;
+  }
+
+  .tagline {
+    text-align: center;
+    font-size: 2.5rem;
+    white-space: normal;
+  }
+
+  .home-content {
+    text-align: center;
+  }
+}
+
+
+
+.hover-effect:hover {
+  color: #ffffff;
+  background-color: #007bff;
+  text-decoration: none;
+}
+
+.header-links a {
+  margin-right: 10px;
+  color: white;
+}
+
+.header-links a:hover {
+  color: #007bff;
+}
+
+/* Additional container styling for smooth transition */
+.content-login-box,
+.login-container {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.forgot-password-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  text-decoration: underline;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.forgot-password-btn:hover {
+  text-decoration: none;
+  color: #0056b3;
+}
+
+/* About Us Section Styles */
+.about-us-section {
+  text-align: center;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-us-section h3 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px 10px;
+  font-size: 14px;
+}
+
+.about-us-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.about-us-image {
+  flex: 1;
+  max-width: 350px;
+}
+
+.about-us-img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-us-text {
+  flex: 2;
+  text-align: left;
+  font-size: 1.1rem;
+  color: #34495e;
+}
+
+.about-us-text p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.about-us-text p:first-of-type {
+  font-weight: bold;
+}
+/* Smooth fade-in animation */
+/* Smooth fade-in animation */
+.visual-wrapper,
+.main-intro {
+  animation: fadeInSlideUp 1s ease-out forwards;
+  opacity: 0; /* Ensure they start as transparent */
+  transform: translateY(20px); /* Start them 20px down */
+}
+
+@keyframes fadeInSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+body {
+  /* ... other body styles ... */
+  /* Remove the animation from the body */
+}
+
+/* Shadow effects */
+.rectangle {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.rectangle:hover {
+  transform: scale(1.02);
+}
+
+/* Circle glow */
+.circle {
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Quarter hover effect */
+.quarter {
+  transition: transform 0.3s ease-in-out, z-index 0s 0.3s; /* Add delay for z-index change */
+  position: absolute; /* Position quarters absolutely */
+  width: 50%; /* Define the size of each quarter */
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+.q1 { background: #ff595e; top: 0; left: 0; }
+.q2 { background: #ffca3a; top: 0; right: 0; }
+.q3 { background: #8ac926; bottom: 0; left: 0; }
+.q4 { background: #1982c4; bottom: 0; right: 0; }
+
+/* On hover, zoom in and bring to the front */
+.quarter:hover {
+  transform: scale(1.1); /* Zoom effect */
+  z-index: 10; /* Bring hovered quarter to the front */
+}
+
+/* Soft gradient background */
+body {
+  background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+  animation: fadeIn 1s ease-in;
+}
+
+/* Enhance button interaction */
+.btn-submit {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+/* Smooth link hover */
+

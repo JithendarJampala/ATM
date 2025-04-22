@@ -1,0 +1,124 @@
+/* styles.css */
+/* General Body and Container Styling */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: black;
+    font-size: 2vh;
+    zoom: 1;
+    transform: scale(1);
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ATM Image Styling */
+img {
+    width: 100%;
+    height: auto;
+    max-width: 100vw;
+    max-height: 100vh;
+    object-fit: contain;
+}
+
+/* ATM Screen Styling */
+.atm-screen {
+    position: absolute;
+    top: 16.5%;
+    left: 16.7%;
+    width: 41.6%;
+    height: 41.5%;
+    background-color: rgb(13, 13, 14);
+    opacity: 0.9;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:  flex-start;
+    color: white;
+    font-size: 1.5rem;
+    font-family: Arial, sans-serif;
+    object-fit: contain;
+    transform-origin: 0 0;
+    min-height: 40%;
+    padding-top: 1rem;
+    box-sizing: border-box; /* Added to push buttons to bottom */
+    margin: 0;
+    padding-bottom: 0.2rem;
+    line-height: 1;
+}
+
+/* Button Container Styling */
+.button-container {
+    margin-top: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    gap: 0.9rem;
+    width: 95%;
+    padding: 0.5rem;
+     /* Added margin to separate from bottom */
+}
+
+.left-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.right-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Button Styling */
+.button {
+    width: 100%; /* Full width of its grid cell */
+    height:4vh;
+    padding: 0.5rem;
+    background-color: white;
+    color: blue;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Button Hover Styling */
+.button:hover {
+    background-color: lightgray;
+}
+
+a.button {
+    text-decoration: none; /* Remove underline only */
+}
+
+#deposit-amount {
+    margin-top: 0.2rem;
+    width: 90%;
+    padding: 0.2rem;
+    background-color: white;
+    color: black;
+    border: 1px solid gray;
+    font-size: 1rem;
+}
+#withdraw-amount {
+    margin-top: 0.2rem;
+    width: 90%;
+    padding: 0.2rem;
+    background-color: white;
+    color: black;
+    border: 1px solid gray;
+    font-size: 1rem;
+}
+

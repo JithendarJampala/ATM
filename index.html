@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - ATM System</title>
+   <link href="home_styles.css" rel="stylesheet">
+  <style>
+    .visual-wrapper {
+      position: relative;
+      height: auto; /* Same as circle */
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      padding-left: 50px;
+      margin: 80px;
+    }
+
+    .rectangle {
+      position: absolute;
+      width: 75vw;
+      height: 300px;
+      background: #d3d3d3;
+      top: 0;
+      left: 150px;
+      border-top-right-radius: 150px;
+      border-bottom-right-radius: 150px;
+      z-index: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .circle {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .quarter {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .q1 {
+      background: #ff595e;
+      top: 0;
+      left: 0;
+    }
+
+    .q2 {
+      background: #ffca3a;
+      top: 0;
+      right: 0;
+    }
+
+    .q3 {
+      background: #8ac926;
+      bottom: 0;
+      left: 0;
+    }
+
+    .q4 {
+      background: #1982c4;
+      bottom: 0;
+      right: 0;
+    }
+    .q1 .quarter-text{
+        top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+    }
+.q3 .quarter-text {
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Shifted slightly right for better visual centering */
+.q2 .quarter-text{
+     top: 60%;
+  left: 40%; /* Adjust this value if needed */
+  transform: translate(-50%, -50%);
+}
+.q4 .quarter-text {
+  top: 40%;
+  left: 40%; /* Adjust this value if needed */
+  transform: translate(-50%, -50%);
+}
+
+    .content-text {
+      font-size: 18px;
+      color: #333;
+      text-align: center;
+      padding-left: 180px;
+    }
+
+    /* Styles for text in the quarters */
+
+      .quarter-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 18px; /* Adjust as needed */
+  font-weight: bold;
+  color: white;
+  padding: 4px;
+  line-height: 1.2;
+  width: 80%; /* So multi-line text stays centered */
+  word-wrap: break-word;
+
+}
+
+   .home-image {
+  width: 370px;  /* Set your desired width */
+  height: 400px;  /* Maintains aspect ratio */
+
+  margin-right: 50px;
+  margin-top: 50px;
+  
+} 
+ .quarter-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      padding: 4px;
+      line-height: 1.2;
+      width: 80%;
+      word-wrap: break-word;
+    }
+
+    /* New styles for playcard boxes */
+     .playcards-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 350px; /* Keep your existing top margin */
+  margin-bottom: 80px; /* Keep your existing bottom margin */
+  margin-left: 80px;   /* Add left margin */
+  margin-right: 80px;  /* Add right margin */
+  z-index: 2;
+  gap: 20px;
+}
+
+    .playcard {
+      background-color: #fff;
+      width: 20%;
+      height: 400px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      transition: transform 0.3s ease;
+      z-index: 3; /* Higher z-index for playcards */
+    }
+
+    .playcard:hover {
+      transform: translateY(-10px);
+    }
+
+    .playcard h3 {
+      font-size: 22px;
+      color: #333;
+    }
+
+    .playcard p {
+      font-size: 16px;
+      color: #555;
+    }
+/* Styles for the image container inside playcard */
+.playcard-image-container {
+  width: 60%; /* Percentage of the playcard's width */
+  height: 60%; /* Percentage of the playcard's width (to maintain circle aspect ratio) */
+  border-radius: 60%; /* Slightly larger to ensure roundness at smaller sizes */
+  overflow: hidden;
+  margin-bottom: 10px; /* Adjust spacing */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 150px; /* Optional: Set a maximum size for very large screens */
+  max-height: 150px; /* Optional: Set a maximum size */
+  
+}
+
+/* Style for the image inside the circle */
+.playcard-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Style for the content text (two lines at the bottom) */
+.playcard-content {
+  font-size: 14px;
+  color: #555;
+  margin-top: 3px; /* Adjust spacing */
+  text-align: center; /* Center the text within the playcard */
+}
+
+/* Adjust playcard styles */
+.playcard {
+  background-color: #fff;
+  width: 30%; /* Adjust width as needed for your layout */
+  height: auto; /* Let content determine height */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: flex-start; /* Align items to the top */
+  align-items: center; /* Center items horizontally */
+  text-align: center;
+  padding: 15px; /* Adjust padding */
+  transition: transform 0.3s ease;
+  z-index: 3;
+}
+
+.playcard:hover {
+  transform: translateY(-5px); /* Slightly less intense hover effect */
+}
+
+.playcard h3 {
+  font-size: 18px; /* Adjust font size */
+  color: #333;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1> APJ ATM</h1>
+    <div class="header-links">
+      <a href="index.html">Home</a> |
+      <a href="javascript:void(0);" onclick="showContent('about')">About Us</a> |
+      <a href="javascript:void(0);" onclick="showContent('address')">Address</a> |
+      <a href="login.html">Login</a> |
+      <a href="signup.html">Sign Up</a> 
+    </div>
+  </header>
+<div class="main-intro">
+  <div>
+  <div class="tagline">
+    Cash when you need it <br> Where you need it.
+  </div>
+  <div class="home-content">
+    <p>
+      New to ATMs? No worries! Our simulator provides a hands-on experience to help you learn and practice ATM operations in a safe and interactive environment.
+    </p>
+    <p>
+      Navigate through real-life scenarios, understand ATM functionalities, and gain confidence before using an actual ATM. Start now and experience hassle-free learning!
+    </p>
+    
+  </div>
+   </div>
+  <div class="image-container">
+    <img src="person.png" alt="ATM Image" class="home-image">
+  </div>
+ </div>
+  <div class="visual-wrapper">
+    <div class="rectangle" id="rectangleContent">
+      <!-- Content will be displayed here -->
+      <p class="content-text">Click on a quarter to display content here.</p>
+    </div>
+    <div class="circle">
+      <!-- The quarter sections now have labels placed inside them -->
+    <div class="quarter q1" onclick="showQuarterContent('q1')">
+  <div class="quarter-text q1-text">ATM Features</div>
+</div>
+<div class="quarter q2" onclick="showQuarterContent('q2')">
+  <div class="quarter-text q2-text">Fund Transfer</div>
+</div>
+<div class="quarter q3" onclick="showQuarterContent('q3')">
+  <div class="quarter-text q3-text">Balance Check</div>
+</div>
+<div class="quarter q4" onclick="showQuarterContent('q4')">
+  <div class="quarter-text q4-text">Mini Statement</div>
+</div>
+
+
+    </div>
+  </div>
+
+   <div class="playcards-container">
+  <div class="playcard">
+    <div class="playcard-image-container">
+      <img src="mustak.png" alt="ATM Features" class="playcard-image">
+    </div>
+    <h3>SYED MUSTAK ALI</h3>
+    <p class="playcard-content">Explore key ATM functions.</p>
+    <p class="playcard-content">Fast cash, balance check.</p>
+  </div>
+  <div class="playcard">
+    <div class="playcard-image-container">
+      <img src="security_tips.png" alt="Security Tips" class="playcard-image">
+    </div>
+    <h3>Security Tips</h3>
+    <p class="playcard-content">Learn safe ATM usage.</p>
+    <p class="playcard-content">Protect your PIN, be aware.</p>
+  </div>
+  <div class="playcard">
+    <div class="playcard-image-container">
+      <img src="transactions.png" alt="Transactions" class="playcard-image">
+    </div>
+    <h3>Transactions</h3>
+    <p class="playcard-content">Practice common actions.</p>
+    <p class="playcard-content">Withdraw, transfer funds.</p>
+  </div>
+</div>
+<footer style="background-color: #333; color: #fff; text-align: center; padding: 20px 10px; font-size: 14px;">
+  <p>&copy; 2025 APJ ATM. All rights reserved.</p>
+  <p>Contact: support@apjatm.com | Helpline: 1800-123-4567</p>
+</footer>
+
+  <script>
+    // Function to display content in the rectangle beside the circle
+     const quarterContents = {
+    q1: `💳 ATM Features:
+    <br><br>
+    - Fast Cash: Withdraw pre-set amounts instantly.<br>
+    - Balance Inquiry: Check your account balance in seconds.<br>
+    - Mini Statement: View your last 5 transactions.<br>
+    - Fund Transfer: Send money between your linked accounts.<br>
+    - PIN Change: Securely update your ATM PIN.`,
+
+    q2: `🔒 Security:
+    <br><br>
+    - Your ATM PIN is confidential. Never share it with anyone.<br>
+    - Always cover the keypad while entering your PIN.<br>
+    - Do not accept help from strangers at the ATM.<br>
+    - Check for skimming devices or suspicious attachments on the machine.`,
+
+    q3: `💼 Transactions:
+    <br><br>
+    - Cash Withdrawal: Take out money as needed.<br>
+    - Fund Transfers: Transfer funds between bank accounts.<br>
+    - Mini Statement: Get a quick overview of recent activity.<br>
+    - Bill Payments (where available): Pay utility bills using the ATM.`,
+
+    q4: `📞 Help & Support:
+    <br><br>
+    - For lost or stolen cards, call our 24/7 helpline: 1800-123-4567.<br>
+    - Email support: support@apjatm.com<br>
+    - Visit your nearest APJ ATM branch for any service-related queries.<br>
+    - You can also access help via our website or ATM Help menu.`
+  };
+
+  function showQuarterContent(key) {
+    const content = quarterContents[key] || "No content available.";
+    document.getElementById("rectangleContent").innerHTML = `<p class="content-text">${content}</p>`;
+  }
+    // Function to change content dynamically for About Us and Address (optional)
+    function showContent(content) {
+      const contentSection = document.getElementById("contentSection");
+
+      if (content === 'about') {
+        contentSection.innerHTML = `
+          <div class="about-us-section">
+            <h3>About Us</h3>
+            <p>At APJ ATM, we are committed to providing secure and efficient banking services with a focus on customer satisfaction. Our goal is to empower our customers with easy and convenient access to their finances, anytime, anywhere.</p>
+          </div>
+        `;
+      } else if (content === 'address') {
+        contentSection.innerHTML = "<h3>Our Address</h3><p>123 APJ Street, City, Country</p>";
+      }
+    }
+    
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Withdraw</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <div class="container">
+        <img src="ATM.png" alt="ATM Machine">
+        <div class="atm-screen">
+            <p>Enter amount you want to withdraw</p>
+            <input type="number" id="withdraw-amount" placeholder="Amount">
+            <div class="button-container">
+                 <div class="left-buttons"></div>
+                <div class="right-buttons">
+                    <button id="confirm-withdraw" class="button">Confirm Withdraw</button>
+
+                    <a href="dashboard.html" class="button">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+        <script>
+    function withdraw() {
+        const amount = parseFloat(document.getElementById("withdraw-amount").value);
+        let balance = parseFloat(localStorage.getItem("balance") || 0);
+
+        if (isNaN(amount) || amount <= 0) {
+            alert("Please enter a valid amount.");
+            return;
+        }
+
+        if (amount > balance) {
+            window.location.href = "invalid_or_insufficient.html";
+            return;
+        }
+
+        balance -= amount;
+        localStorage.setItem("balance", balance);
+        logTransaction("Withdraw", amount);
+
+        // Redirect to success page
+        window.location.href = "withdrawsuccessfull.html";
+    }
+
+    function logTransaction(type, amount) {
+        const transaction = {
+            date: new Date().toLocaleString(),
+            type: type,
+            amount: amount
+        };
+
+        let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+        transactions.push(transaction);
+        localStorage.setItem("transactions", JSON.stringify(transactions));
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const withdrawBtn = document.getElementById('confirm-withdraw');
+        if (withdrawBtn) {
+            withdrawBtn.addEventListener('click', withdraw);
+        }
+    });
+</script>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

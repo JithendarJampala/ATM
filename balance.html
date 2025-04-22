@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Check balance</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <img src="ATM.png" alt="ATM Machine">
+        <div class="atm-screen">
+            <p>Your current account balance is</p>
+            <!-- Add an element to display the balance -->
+            <p id="account-balance" class="balance-display">Loading...</p>
+            <div class="button-container">
+                <div class="left-buttons"></div>
+                <div class="right-buttons">
+                    <a href="dashboard.html" class="button">OK</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function displayBalance() {
+            // Get balance from localStorage, default to 0 if not found
+            const balance = localStorage.getItem("balance") || 0;
+            // Update the balance in the HTML
+            document.getElementById("account-balance").textContent = `Rs.${parseFloat(balance).toFixed(2)}`;
+        }
+
+        // Wait for the DOM content to load before executing
+        document.addEventListener('DOMContentLoaded', displayBalance);
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>

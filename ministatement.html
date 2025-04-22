@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Withdraw</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #transaction-list {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 10px 0;
+  padding-left: 20px;
+  list-style-type: disc;
+  color: white;
+  max-height: 150px;
+  overflow-y: auto;
+}
+</style>
+    
+</head>
+<body>
+    <div class="container">
+        <img src="ATM.png" alt="ATM Machine">
+        <div class="atm-screen">
+             <h4>Mini Statement</h4>
+  <ul id="transaction-list"></ul>
+  <div class="button-container">
+                 <div class="left-buttons"></div>
+                <div class="right-buttons">
+                    <a href="dashboard.html" class="button">Ok</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <script src="script.js"></script>
+        <script>
+  const transactionList = document.getElementById("transaction-list");
+  const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+
+  if (transactions.length === 0) {
+    transactionList.innerHTML = "<li>No transactions available.</li>";
+  } else {
+    transactions.slice(-7).forEach(tx => {
+      const li = document.createElement("li");
+      li.textContent = `${tx.date} - ${tx.type}: ₹${tx.amount}`;
+      transactionList.appendChild(li);
+    });
+  }
+</script>
+    
+</body>
+</html>
+

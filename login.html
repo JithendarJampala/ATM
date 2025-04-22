@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - ATM System</title>
+  <link href="home_styles.css" rel="stylesheet">
+
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1> APJ ATM</h1>
+    <div class="header-links">
+    <a href="index.html">Home</a> |
+    <a href="login.html">Login</a> |
+    <a href="signup.html">Sign Up</a> 
+    
+    </div>
+  </header>
+
+
+
+  <!-- Main content and login section inside a box -->
+  <div class="main-container">
+    <div class="content-login-box">
+      <!-- Left Section: Content Area -->
+      <div class="content-section" id="contentSection">
+        
+      </div>
+
+      <!-- Right Section: Login Form -->
+      <div class="login-container">
+        <h2>Login </h2>
+        <br>
+
+        <div class="input-group">
+            <label for="cardNumber">Card Number</label>
+            <input type="text" id="cardNumber" style="width: 70%; height: 20%;" placeholder="Enter your card number" required>
+        </div>
+
+
+        <div class="input-group">
+            <label for="pin">PIN</label><br>
+            <input type="password" id="pin" style="width: 70%; height: 20%;" placeholder="Enter your PIN" required><br>
+          <button class="forgot-password-btn" onclick="forgotPassword()">Forgot PIN?</button>
+        </div>
+
+        <button class="btn-submit" onclick="login()">Login</button>
+        <br>
+
+        <!-- Update the link to the new sign-up page -->
+        <div class="signup-link">
+            <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    function login() {
+    const cardNumber = document.getElementById("cardNumber").value;
+    const pin = document.getElementById("pin").value;
+
+    if (cardNumber && pin) {
+        const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+        
+        // Debugging: Check if the account array is being retrieved correctly
+        console.log("Accounts in localStorage:", accounts);
+
+        const account = accounts.find(acc => acc.cardNumber === cardNumber);
+        
+        // Debugging: Log found account
+        console.log("Found account:", account);
+
+        if (account) {
+            // Check if the PIN matches
+            const decodedPin = atob(account.pin); // Decoding stored PIN
+            console.log("Decoded PIN from localStorage:", decodedPin);
+            if (decodedPin === pin) {
+                sessionStorage.setItem("currentAccount", JSON.stringify(account)); // Store account info
+                window.location.href = "dashboard.html"; // Redirect to dashboard
+            } else {
+                alert("Invalid PIN.");
+            }
+        } else {
+            alert("Invalid card number.");
+        }
+    } else {
+        alert("Please enter both card number and PIN.");
+    }
+}
+
+
+
+function forgotPassword() {
+  const cardNumber = document.getElementById("cardNumber").value;
+
+  if (cardNumber) {
+    const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+    const account = accounts.find(acc => acc.cardNumber === cardNumber);
+
+    if (account) {
+      alert(`An email has been sent to the registered email for card number: ${cardNumber}.`);
+    } else {
+      alert("Card number not found.");
+    }
+  } else {
+    alert("Please enter your card number to proceed.");
+  }
+}
+
+  </script>
+
+</body>
+</html>

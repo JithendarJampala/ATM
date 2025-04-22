@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Change PIN</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .atm-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 1rem;
+    gap: 0.8rem; /* Even space between elements */
+}
+
+.atm-screen p {
+    margin: 0;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.atm-screen input {
+    width: 80%;
+    padding: 0.4rem;
+    font-size: 1rem;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+
+.button-container {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.9rem;
+    width: 90%;
+    padding: 0.5rem;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <img src="ATM.png" alt="ATM Machine">
+        <div class="atm-screen">
+            <p>Enter your current PIN</p>
+            <input type="password" id="current-pin" placeholder="Current PIN" maxlength="4">
+
+            <p>Enter new PIN</p>
+            <input type="password" id="new-pin" placeholder="New PIN" maxlength="4">
+
+            <p>Confirm new PIN</p>
+            <input type="password" id="confirm-pin" placeholder="Confirm PIN" maxlength="4">
+
+            <div class="button-container">
+                
+                <button id="change-pin-btn" class="button">Change PIN</button>
+
+                <a href="dashboard.html" class="button">Back</a>
+            </div>
+        </div>
+    </div>
+    <script> 
+ 
+document.getElementById("change-pin-btn").addEventListener("click", function () {
+    const currentPin = document.getElementById("current-pin").value;
+    const newPin = document.getElementById("new-pin").value;
+    const confirmPin = document.getElementById("confirm-pin").value;
+
+    const storedPin = atob(localStorage.getItem("pin"));
+
+
+    if (currentPin !== storedPin) {
+        alert("Current PIN is incorrect.");
+        return;
+    }
+
+    if (newPin.length !== 4 || isNaN(newPin)) {
+        alert("New PIN must be a 4-digit number.");
+        return;
+    }
+
+    if (newPin !== confirmPin) {
+        alert("New PIN and Confirm PIN do not match.");
+        return;
+    }
+
+    localStorage.setItem("pin", newPin);
+    alert("PIN changed successfully.");
+    window.location.href = "pinsuccessful.html";
+});
+
+
+
+</script>
+
+       
+    <script src="script.js"></script>
+    
+</body>
+</html>

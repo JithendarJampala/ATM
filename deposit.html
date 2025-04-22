@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Deposit</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <div class="container">
+        <img src="ATM.png" alt="ATM Machine">
+        <div class="atm-screen">
+            <p>Enter amount you want to deposit</p>
+            <input type="number" id="deposit-amount" placeholder="Amount">
+            <div class="button-container">
+                 <div class="left-buttons"></div>
+                <div class="right-buttons">
+                    <button id="confirm-deposit" class="button">Confirm Deposit</button>
+
+                    <a href="dashboard.html" class="button">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Function to handle Deposit operation
+function deposit() {
+    const amount = parseFloat(document.getElementById("deposit-amount").value);
+    let balance = parseFloat(localStorage.getItem("balance") || 0);
+
+    if (amount <= 0) {
+        alert("Please enter a valid amount.");
+        return;
+    }
+
+    balance += amount;  // Add deposit amount to the balance
+    localStorage.setItem("balance", balance);  // Update the balance in localStorage
+    logTransaction("Deposit", amount);  // Log the transaction
+
+    // Optionally redirect after deposit
+    window.location.href = "depositesuccessful.html";  // Redirect after successful deposit
+}
+
+// Function to log transactions
+function logTransaction(type, amount) {
+    const transaction = {
+        date: new Date().toLocaleString(),
+        type: type,
+        amount: amount,
+    };
+
+    let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+    transactions.push(transaction);
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+}
+
+// Wait for DOM content to be loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Handle Deposit operation
+    const depositBtn = document.getElementById('confirm-deposit');
+    if (depositBtn) {
+        depositBtn.addEventListener('click', deposit);
+    }
+});
+</script>
+    <script src="script.js"></script>
+</body>
+</html>

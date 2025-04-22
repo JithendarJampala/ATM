@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Fast Cash</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .fast-cash-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      width: 90%;
+      margin-top: 1rem;
+    }
+
+    .fast-cash-options button {
+      padding: 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: white;
+      color: blue;
+      cursor: pointer;
+    }
+
+    .fast-cash-options button:hover {
+      background-color: lightgray;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="ATM.png" alt="ATM Machine" />
+    <div class="atm-screen">
+      <p>Select Amount</p>
+      <div class="button-container">
+        <div class="left-buttons">
+            <button class="button fast-cash-btn" data-amount="100">₹100</button>
+            <button class="button fast-cash-btn" data-amount="500">₹500</button>
+            <button class="button fast-cash-btn" data-amount="1000">₹1000</button>
+        </div>
+        <div class="right-buttons">
+            <button class="button fast-cash-btn" data-amount="200">₹200</button>
+            <button class="button fast-cash-btn" data-amount="2000">₹2000</button>
+            <button class="button fast-cash-btn" data-amount="5000">₹5000</button>
+            <a href="dashboard.html" class="button">Back</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  // Set initial balance if not already present
+  if (localStorage.getItem('balance') === null) {
+    localStorage.setItem('balance', '10000'); // default balance if needed
+  }
+
+  document.querySelectorAll('.fast-cash-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const selectedAmount = parseInt(button.dataset.amount);
+      let currentBalance = parseFloat(localStorage.getItem('balance'));
+
+      if (currentBalance >= selectedAmount) {
+        currentBalance -= selectedAmount;
+        localStorage.setItem('balance', currentBalance);
+        
+        window.location.href = 'withdrawsuccessfull.html';
+      } else {
+        alert('Insufficient balance.');
+      }
+    });
+  });
+</script>
+  <script src="script.js"></script>
+</body>
+</html>

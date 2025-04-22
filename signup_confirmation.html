@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up Confirmation - ATM System</title>
+  <link href="home_styles.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    .confirmation-box {
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      border: 2px solid #0b0b0b;
+    }
+
+    h2 {
+      color: #0b0b0b;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .important {
+      font-weight: bold;
+      color: #0b0b0b;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #555;
+      margin-top: 20px;
+    }
+
+    .deposit-button {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #0b0b0b;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .deposit-button:hover {
+      background-color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="confirmation-box">
+    <h2>Account Created Successfully!</h2>
+    <p>Your ATM Card Number is: <span class="important" id="displayCardNumber"></span></p>
+    <p>Your generated PIN is: <span class="important" id="displayPIN"></span></p>
+    <p class="note">Please make a note of your ATM Card Number and PIN as this information will not be shown again.</p>
+    <button class="deposit-button" onclick="goToDeposit()">OK</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const cardNumberDisplay = document.getElementById('displayCardNumber');
+      const pinDisplay = document.getElementById('displayPIN');
+
+      const cardNumber = sessionStorage.getItem('newCardNumber');
+      const pin = sessionStorage.getItem('generatedPIN');
+
+      if (cardNumber && pin) {
+        cardNumberDisplay.textContent = cardNumber;
+        pinDisplay.textContent = pin;
+
+        // Clear from sessionStorage
+        sessionStorage.removeItem('newCardNumber');
+        sessionStorage.removeItem('generatedPIN');
+      } else {
+        alert("Error: Account details not found. Please try signing up again.");
+        window.location.href = "signup.html";
+      }
+    });
+
+    function goToDeposit() {
+      window.open("deposit.html", "_blank");
+      setTimeout(function () {
+        window.location.href = "index.html";
+      }, 10000);
+    }
+  </script>
+</body>
+</html>
