@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - ATM System</title>
+  <link href="home_styles.css" rel="stylesheet">
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      height: 100vh;
+    }
+
+    /* Sign-Up Form Styles */
+    .signup-container {
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      width: 40%;
+      box-sizing: border-box;
+      border: 2px solid #0b0b0b;
+      margin-top: 20px;
+      margin-bottom: 0px;
+      align-self: center;
+      flex-shrink: 0;
+      margin-top: 80px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 500;
+      color: #0b0b0b;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 6px 10px;
+      border: 2px solid #ccc; /* Default border color */
+      border-radius: 5px;
+      font-size: 16px;
+      transition: all 0.3s;
+      background-color: #f9f9f9; /* Normal background */
+    }
+
+    .input-group input:focus {
+      border-color: #0b0b0b;
+      outline: none;
+    }
+
+    /* Valid input styles */
+    .input-group input.valid {
+      border-color: green;
+      background-color: #e8f7e8; /* Light green background */
+    }
+
+    /* Invalid input styles */
+    .input-group input.invalid {
+      border-color: red;
+      background-color: #f8d7da; /* Light red background */
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 12px;
+      background-color: #0b0b0b;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-submit:hover {
+      background-color: #0b0b0b;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #0b0b0b;
+    }
+
+    .login-link a {
+      color: #0b0b0b;
+      text-decoration: none;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    #signup-message {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1> APJ ATM</h1>
+    <div class="header-links">
+      <a href="index.html">Home</a> |
+      <a href="login.html">Login</a> |
+      <a href="signup.html">Sign Up</a>
+    </div>
+  </header>
+
+  <div class="signup-container">
+    <h2>Sign Up to Your ATM</h2>
+
+    <div class="input-group">
+      <label for="newAccountNumber">Account Number</label>
+      <input type="text" id="newAccountNumber" placeholder="Enter your account number (10 digits)" required maxlength="10" pattern="^\d{10}$">
+    </div>
+
+    <div class="input-group">
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" placeholder="Enter your full name" required>
+    </div>
+
+    <div class="input-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
+    </div>
+
+    <div class="input-group">
+      <label for="phoneNumber">Phone Number</label>
+      <input type="tel" id="phoneNumber" placeholder="Enter your phone number (10 digits)" required maxlength="10" pattern="^\d{10}$">
+    </div>
+
+    <div class="input-group">
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" required>
+    </div>
+
+    <button class="btn-submit" onclick="signUp()">Sign Up</button>
+
+    <div id="signup-message"></div>
+
+    <div class="login-link">
+      <p>Already have an account? <a href="login.html">Login</a></p>
+    </div>
+  </div>
+
+  <script>
+    // Real-time field validation
+    document.addEventListener("DOMContentLoaded", () => {
+      const accountInput = document.getElementById("newAccountNumber");
+      const phoneInput = document.getElementById("phoneNumber");
+      const dobInput = document.getElementById("dob");
+      const fullNameInput = document.getElementById("fullName");
+      const emailInput = document.getElementById("email");
+
+      // Only digits validation
+      const digitsOnlyRegex = /^\d+$/;
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+      // Account Number Validation
+      accountInput.addEventListener("input", () => {
+        if (!digitsOnlyRegex.test(accountInput.value)) {
+          accountInput.classList.remove("valid");
+          accountInput.classList.add("invalid");
+        } else if (accountInput.value.length === 10) {
+          accountInput.classList.remove("invalid");
+          accountInput.classList.add("valid");
+        } else {
+          accountInput.classList.remove("valid");
+          accountInput.classList.remove("invalid");
+        }
+      });
+
+      // Phone Number Validation
+      phoneInput.addEventListener("input", () => {
+        if (!digitsOnlyRegex.test(phoneInput.value)) {
+          phoneInput.classList.remove("valid");
+          phoneInput.classList.add("invalid");
+        } else if (phoneInput.value.length === 10) {
+          phoneInput.classList.remove("invalid");
+          phoneInput.classList.add("valid");
+        } else {
+          phoneInput.classList.remove("valid");
+          phoneInput.classList.remove("invalid");
+        }
+      });
+
+      // Full Name Validation
+      fullNameInput.addEventListener("input", () => {
+        if (fullNameInput.value.trim() === "") {
+          fullNameInput.classList.remove("valid");
+          fullNameInput.classList.add("invalid");
+        } else {
+          fullNameInput.classList.remove("invalid");
+          fullNameInput.classList.add("valid");
+        }
+      });
+
+      // Email Validation
+      emailInput.addEventListener("input", () => {
+        if (!emailRegex.test(emailInput.value)) {
+          emailInput.classList.remove("valid");
+          emailInput.classList.add("invalid");
+        } else {
+          emailInput.classList.remove("invalid");
+          emailInput.classList.add("valid");
+        }
+      });
+
+      // Date of Birth Validation (age check)
+      dobInput.addEventListener("change", () => {
+        const dob = new Date(dobInput.value);
+        const today = new Date();
+        let age = today.getFullYear() - dob.getFullYear();
+        const m = today.getMonth() - dob.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+          age--;
+        }
+
+        if (dob > today) {
+          dobInput.classList.remove("valid");
+          dobInput.classList.add("invalid");
+        } else if (age < 18) {
+          dobInput.classList.remove("valid");
+          dobInput.classList.add("invalid");
+        } else {
+          dobInput.classList.remove("invalid");
+          dobInput.classList.add("valid");
+        }
+      });
+    });
+
+    function signUp() {
+      const newAccountNumber = document.getElementById("newAccountNumber").value.trim();
+      const fullName = document.getElementById("fullName").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phoneNumber = document.getElementById("phoneNumber").value.trim();
+      const dob = document.getElementById("dob").value;
+
+      const signupMessageDiv = document.getElementById("signup-message");
+
+      // Validate Email
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      if (!emailRegex.test(email)) {
+        alert("Please enter a valid email.");
+        return;
+      }
+
+      // Validate numeric-only account number and phone number
+      const digitsOnlyRegex = /^\d+$/;
+
+      if (!digitsOnlyRegex.test(newAccountNumber) || newAccountNumber.length !== 10) {
+        alert("Account number must be exactly 10 digits long.");
+        return;
+      }
+
+      if (!digitsOnlyRegex.test(phoneNumber) || phoneNumber.length !== 10) {
+        alert("Phone number must be exactly 10 digits long.");
+        return;
+      }
+
+      // Validate all fields are filled
+      if (newAccountNumber && fullName && email && phoneNumber && dob) {
+        const today = new Date();
+        const birthDate = new Date(dob);
+        if (birthDate > today) {
+          alert("Date of birth cannot be in the future.");
+          return;
+        }
+
+        // Calculate age
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+
+        if (age < 18) {
+          alert("You must be at least 18 years old to sign up.");
+          return;
+        }
+
+        // Get existing accounts from localStorage
+        const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+
+        // Check if account number already exists
+        const existingAccount = accounts.find(acc => acc.accountNumber === newAccountNumber);
+        if (existingAccount) {
+          alert("Account number already exists. Please use a different one.");
+          return;
+        }
+
+        // Generate card number and PIN
+        const newCardNumber = generateCardNumber();
+        const generatedPIN = generatePIN();
+        const hashedPIN = btoa(generatedPIN);
+
+        // Create new account object
+        const account = {
+          accountNumber: newAccountNumber,
+          cardNumber: newCardNumber,
+          pin: hashedPIN,
+          fullName: fullName,
+          email: email,
+          phoneNumber: phoneNumber,
+          dob: dob,
+          balance: 0,
+          transactions: []
+        };
+
+        // Save to localStorage
+        accounts.push(account);
+        localStorage.setItem("accounts", JSON.stringify(accounts));
+
+        // Save to sessionStorage
+        sessionStorage.setItem("currentAccount", JSON.stringify(account));
+        sessionStorage.setItem("newCardNumber", newCardNumber);
+        sessionStorage.setItem("generatedPIN", generatedPIN);
+
+        // Redirect
+        window.location.href = "signup_confirmation.html";
+      } else {
+        alert("Please fill in all fields.");
+      }
+    }
+
+    // Function to generate a card number (separate from account number)
+    function generateCardNumber() {
+      const prefix = "123456"; // Example: Prefix for the bank
+      const remainingDigits = 16 - prefix.length;
+      let randomNumber = '';
+      for (let i = 0; i < remainingDigits - 1; i++) {
+        randomNumber += Math.floor(Math.random() * 10);
+      }
+      const cardNumberWithoutCheck = prefix + randomNumber;
+      const checkDigit = generateLuhnCheckDigit(cardNumberWithoutCheck);
+      return cardNumberWithoutCheck + checkDigit;
+    }
+
+    // Function to generate PIN
+    function generatePIN() {
+      return Math.floor(1000 + Math.random() * 9000).toString();
+    }
+
+    // Luhn Algorithm to generate check digit for card number
+    function generateLuhnCheckDigit(cardNumber) {
+      let sum = 0;
+      let alternate = false;
+      for (let i = cardNumber.length - 1; i >= 0; i--) {
+        let n = parseInt(cardNumber.charAt(i), 10);
+        if (alternate) {
+          n *= 2;
+          if (n > 9) n -= 9;
+        }
+        sum += n;
+        alternate = !alternate;
+      }
+      return (10 - (sum % 10)) % 10;
+    }
+  </script>
+
+</body>
+</html>
