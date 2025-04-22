@@ -20,6 +20,13 @@ html, body {
     justify-content: center;
     align-items: center;
 }
+.button:hover {
+    background-color: #4CAF50; /* Change to any preferred color */
+    color: white;
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+
 
 /* ATM Image Styling */
 img {
